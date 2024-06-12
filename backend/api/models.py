@@ -103,10 +103,10 @@ class Post(models.Model):
     class Meta:
         verbose_name_plural = "Post"
 
-    def save(self, *args, **kwargs):
-        if self.slug == "" or self.slug == None:
-            self.slug = slugify(self.title) + "-" + shortuuid.uuid()[:2]
-        super(Post, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if self.slug == "" or self.slug == None:
+    #         self.slug = slugify(self.title) + "-" + shortuuid.uuid()[:2]
+    #     super(Post, self).save(*args, **kwargs)
     
     def comments(self):
         return Comment.objects.filter(post=self).order_by("-id")

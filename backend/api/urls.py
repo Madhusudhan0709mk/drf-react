@@ -1,9 +1,9 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework.response import Response
-from .views import UserCreateView,MyTokenObtainPairView,RoutesAPIView
+from .views import *
 # from rest_framework.decorators import api_view
-from . import views
+from . import *
 from rest_framework.permissions import AllowAny
 # from rest_framework.reverse import reverse
 # @api_view(['GET'])
@@ -21,7 +21,14 @@ from rest_framework.permissions import AllowAny
 urlpatterns = [
     # path('',views.getRoutes),
     path('', RoutesAPIView.as_view(),name='routes'),
-    path('register/',UserCreateView.as_view(),name='register'),
-    path('login/',MyTokenObtainPairView.as_view(),name='token_obtain_pair'),
-    path('token/refresh/',TokenRefreshView.as_view(),name='token_refresh')
+    path('user/register/',UserCreateView.as_view(),name='register'),
+    path('user/login/',MyTokenObtainPairView.as_view(),name='token_obtain_pair'),
+    path('user/token/refresh/',TokenRefreshView.as_view(),name='token_refresh'),
+    path('user/profile/<user_id>/',ProfileRetriveUpdateAPIView.as_view(),name='user_profile'),
+    path('user/logout/', LogoutView.as_view(), name='logout'),
+    
+    path('post/category/list/',CategoryListAPIView.as_view(),name='list_category'),
+    path('post/category/posts/<slug>/', PostCategoryListAPIView.as_view()),
+    path('post/lists/',PostAPIView.as_view(),name='posts_list'),
+    path('post/detail/<slug>/',PostDetailAPIView.as_view(),name='post-detail'),
 ]
